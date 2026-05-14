@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>roger/marketing — Roger A. · Visual Designer & Marketing Assistant</title>
+  <meta name="description"
+    content="Visual Designer & Marketing Assistant. Diseño que comunica, estrategia que conecta — UI/UX, branding y marketing digital." />
+  <meta name="theme-color" content="#504FED" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- React + Babel (necesarios para compilar JSX en el navegador) -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"
+    integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"
+    integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"
+    integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y"
+    crossorigin="anonymous"></script>
+</head>
+
+<body data-mode="light">
+  <div id="root"></div>
+
+  <!-- Contenido (texto, proyectos, servicios, testimonios) -->
+  <script>
+    /**
+     * Datos de contenido del portfolio.
+     * Edita este archivo para cambiar textos, servicios, proyectos y testimonios.
+     * No hay lógica aquí — solo contenido.
+     */
+    window.DATA = {
+      brand: "Roger",
+      brandSlash: "Marketing",
+      fullName: "Roger Avellana",
+      role: "visual designer & marketing assistant",
+      intro: "ayudo a marcas a convertir el ruido visual en claridad",
+      introBold: "interfaces afiladas, identidades coherentes y comunicación que conecta.",
+      location: "Barcelona · Catalunya",
+      year: "2026",
+      email: "roger.ar123@gmail.com",
+      linkedin: "https://www.linkedin.com/in/roger-avellana/",
+
+      /* ── Servicios (accordion 01–05) ─────────────────────────── */
+      services: [
+        {
+          num: "01",
+          title: "diseño visual & dirección creativa",
+          desc: "Desde el concepto hasta la pieza final. Doy forma al lenguaje visual de tu marca — tipografía, color, composición y sistema gráfico — para que cada punto de contacto hable el mismo idioma. Pienso en la marca como un sistema vivo, no como un logotipo aislado."
+        },
+        {
+          num: "02",
+          title: "branding & identidad corporativa",
+          desc: "Construyo identidades que escalan: del símbolo a la guía de marca completa. Diseño piezas que no se quedan en lo bonito — funcionan en papel, en pantalla, en un stand de feria y en un story de Instagram. Coherencia visual en todos los formatos."
+        },
+        {
+          num: "03",
+          title: "ui/ux & diseño de interfaces",
+          desc: "Diseño interfaces que se entienden a la primera. Wireframes, prototipos y diseño final en Figma — con foco en jerarquía, accesibilidad y flujos claros. He trabajado con plataformas IoT, dashboards industriales y portales B2B donde la usabilidad no es opcional."
+        },
+        {
+          num: "04",
+          title: "marketing digital & contenido",
+          desc: "Estrategia y ejecución para redes sociales y campañas publicitarias. Calendarios editoriales, packs de posts, análisis de métricas. Diseño pensando en el feed, no solo en la pieza individual — coherencia visual y narrativa en el tiempo."
+        },
+        {
+          num: "05",
+          title: "ia aplicada al diseño",
+          desc: "Uso Claude, ChatGPT y Gemini como herramientas para acelerar el proceso, no para sustituir el criterio. Investigación, ideación, redacción y prototipado asistido. Iteraciones que antes tomaban semanas hoy se resuelven en días."
+        },
+      ],
+
+      /* ── Proyectos (carrusel horizontal) ─────────────────────── */
+      projects: [
+        { id: 1, num: "01", title: "intera — identidad corporativa", cat: "branding", desc: "Rediseño completo de la identidad visual: logotipo, paleta, tipografía y sistema de marca aplicado a todos los materiales corporativos.", year: "2024", color: "#504FED", href: "#" },
+        { id: 2, num: "02", title: "ayuntamiento de igualada — campañas", cat: "marketing", desc: "Diseño y ejecución de materiales gráficos para campañas municipales: cartelería, banners digitales y publicaciones en redes.", year: "2018–2019", color: "#D9482C", href: "#" },
+        { id: 3, num: "03", title: "sensing & control — dashboard iot", cat: "ui/ux", desc: "Diseño de interfaz para plataforma de monitorización IoT. Visualización de datos en tiempo real con foco en usabilidad operativa.", year: "2019–2021", color: "#0E8A5A", href: "#" },
+        { id: 4, num: "04", title: "nvision — ferias internacionales", cat: "diseño", desc: "Producción de materiales para ferias de I+D: stands, roll-ups, folletos técnicos y presentaciones corporativas.", year: "2021–2023", color: "#E0A82E", href: "#" },
+        { id: 5, num: "05", title: "intera — estrategia digital", cat: "marketing", desc: "Planificación de contenido para redes sociales: calendario editorial, packs de posts y análisis de métricas mensuales.", year: "2023–2026", color: "#7A5BD8", href: "#" },
+      ],
+
+      /* ── Testimonios ─────────────────────────────────────────── */
+      testimonials: [
+        { text: "Roger combina criterio visual y estratégico de una forma poco habitual. Entiende la marca como sistema, no como una colección de piezas sueltas.", name: "Cliente · INTERA", role: "Marketing Manager" },
+        { text: "Trabajar con Roger en las ferias internacionales fue clave. Capaz de traducir tecnología compleja en materiales que cualquiera entendía.", name: "Equipo · nVision Systems", role: "R&D Lead" },
+        { text: "Atento al detalle, ordenado y proactivo. Aporta soluciones cuando los demás solo ven problemas — y siempre con calma.", name: "Compañero · Sensing & Control", role: "Project Manager" },
+        { text: "Las campañas que diseñó para el ayuntamiento funcionaron porque no eran solo bonitas — eran legibles, claras y respetaban el tono institucional.", name: "Colaboración · Ayuntamiento", role: "Comunicación" },
+        { text: "Honesto, curioso y con muchas ganas. La combinación de diseño + marketing + IA lo convierte en un perfil muy completo para equipos pequeños.", name: "Mentor", role: "Senior Designer" },
+        { text: "Lo que más me sorprendió fue cómo integró IA en la estrategia de marketing sin perder el tono de marca. Las campañas ganaron en velocidad y en coherencia — algo que no suele ir junto.", name: "Colaboración · Agencia Digital", role: "Digital Marketing Lead" },
+      ],
+
+      /* ── About ───────────────────────────────────────────────── */
+      about: "/me llamo roger avellana. diseñador desde 2016, ahora también marketing. catalán de igualada. me apasiona el momento en que un proyecto deja de ser una idea borrosa y empieza a tener forma. más obsesionado con el proceso que con el resultado final.",
+
+      /* ── Enlaces externos ────────────────────────────────────── */
+      links: [
+        { kind: "video", title: "caso de estudio — rediseño intera", href: "#" },
+        { kind: "artículo", title: "diseñar con ia: lo que aprendí en 6 meses", href: "#" },
+        { kind: "talk", title: "branding para pymes — lo importante", href: "#" },
+        { kind: "podcast", title: "diseño + marketing — un buen mix", href: "#" },
+      ],
+
+      /* ── Toolbox (skills) ────────────────────────────────────── */
+      skills: [
+        "adobe photoshop", "adobe illustrator", "adobe indesign", "figma",
+        "branding", "ui/ux design", "marketing digital", "redes sociales",
+        "claude ai", "chatgpt", "gemini",
+        "microsoft excel", "microsoft word", "google workspace"
+      ],
+    };
+  </script>
+
+  <!-- Panel de Tweaks (definiciones y hook useTweaks) -->
+  <script type="text/babel">
+
+    const __TWEAKS_STYLE = `
+  .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;
+    max-height:calc(100vh - 32px);display:flex;flex-direction:column;
+    background:rgba(250,249,247,.78);color:#29261b;
+    -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
+    border:.5px solid rgba(255,255,255,.6);border-radius:14px;
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 40px rgba(0,0,0,.18);
+    font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
+  .twk-hd{display:flex;align-items:center;justify-content:space-between;
+    padding:10px 8px 10px 14px;cursor:move;user-select:none}
+  .twk-hd b{font-size:12px;font-weight:600;letter-spacing:.01em}
+  .twk-x{appearance:none;border:0;background:transparent;color:rgba(41,38,27,.55);
+    width:22px;height:22px;border-radius:6px;cursor:default;font-size:13px;line-height:1}
+  .twk-x:hover{background:rgba(0,0,0,.06);color:#29261b}
+  .twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;
+    overflow-y:auto;overflow-x:hidden;min-height:0;
+    scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.15) transparent}
+  .twk-body::-webkit-scrollbar{width:8px}
+  .twk-body::-webkit-scrollbar-track{background:transparent;margin:2px}
+  .twk-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:4px;
+    border:2px solid transparent;background-clip:content-box}
+  .twk-body::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.25);
+    border:2px solid transparent;background-clip:content-box}
+  .twk-row{display:flex;flex-direction:column;gap:5px}
+  .twk-row-h{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
+  .twk-lbl{display:flex;justify-content:space-between;align-items:baseline;
+    color:rgba(41,38,27,.72)}
+  .twk-lbl>span:first-child{font-weight:500}
+  .twk-val{color:rgba(41,38,27,.5);font-variant-numeric:tabular-nums}
+
+  .twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:rgba(41,38,27,.45);padding:10px 0 0}
+  .twk-sect:first-child{padding-top:0}
+
+  .twk-field{appearance:none;width:100%;height:26px;padding:0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;
+    background:rgba(255,255,255,.6);color:inherit;font:inherit;outline:none}
+  .twk-field:focus{border-color:rgba(0,0,0,.25);background:rgba(255,255,255,.85)}
+  select.twk-field{padding-right:22px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='rgba(0,0,0,.5)' d='M0 0h10L5 6z'/></svg>");
+    background-repeat:no-repeat;background-position:right 8px center}
+
+  .twk-slider{appearance:none;-webkit-appearance:none;width:100%;height:4px;margin:6px 0;
+    border-radius:999px;background:rgba(0,0,0,.12);outline:none}
+  .twk-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
+    width:14px;height:14px;border-radius:50%;background:#fff;
+    border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+  .twk-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;
+    background:#fff;border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+
+  .twk-seg{position:relative;display:flex;padding:2px;border-radius:8px;
+    background:rgba(0,0,0,.06);user-select:none}
+  .twk-seg-thumb{position:absolute;top:2px;bottom:2px;border-radius:6px;
+    background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(0,0,0,.12);
+    transition:left .15s cubic-bezier(.3,.7,.4,1),width .15s}
+  .twk-seg.dragging .twk-seg-thumb{transition:none}
+  .twk-seg button{appearance:none;position:relative;z-index:1;flex:1;border:0;
+    background:transparent;color:inherit;font:inherit;font-weight:500;min-height:22px;
+    border-radius:6px;cursor:default;padding:4px 6px;line-height:1.2;
+    overflow-wrap:anywhere}
+
+  .twk-toggle{position:relative;width:32px;height:18px;border:0;border-radius:999px;
+    background:rgba(0,0,0,.15);transition:background .15s;cursor:default;padding:0}
+  .twk-toggle[data-on="1"]{background:#34c759}
+  .twk-toggle i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;
+    background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
+  .twk-toggle[data-on="1"] i{transform:translateX(14px)}
+
+  .twk-num{display:flex;align-items:center;height:26px;padding:0 0 0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;background:rgba(255,255,255,.6)}
+  .twk-num-lbl{font-weight:500;color:rgba(41,38,27,.6);cursor:ew-resize;
+    user-select:none;padding-right:8px}
+  .twk-num input{flex:1;min-width:0;height:100%;border:0;background:transparent;
+    font:inherit;font-variant-numeric:tabular-nums;text-align:right;padding:0 8px 0 0;
+    outline:none;color:inherit;-moz-appearance:textfield}
+  .twk-num input::-webkit-inner-spin-button,.twk-num input::-webkit-outer-spin-button{
+    -webkit-appearance:none;margin:0}
+  .twk-num-unit{padding-right:8px;color:rgba(41,38,27,.45)}
+
+  .twk-btn{appearance:none;height:26px;padding:0 12px;border:0;border-radius:7px;
+    background:rgba(0,0,0,.78);color:#fff;font:inherit;font-weight:500;cursor:default}
+  .twk-btn:hover{background:rgba(0,0,0,.88)}
+  .twk-btn.secondary{background:rgba(0,0,0,.06);color:inherit}
+  .twk-btn.secondary:hover{background:rgba(0,0,0,.1)}
+
+  .twk-swatch{appearance:none;-webkit-appearance:none;width:56px;height:22px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:0;cursor:default;
+    background:transparent;flex-shrink:0}
+  .twk-swatch::-webkit-color-swatch-wrapper{padding:0}
+  .twk-swatch::-webkit-color-swatch{border:0;border-radius:5.5px}
+  .twk-swatch::-moz-color-swatch{border:0;border-radius:5.5px}
+`;
+
+    function useTweaks(defaults) {
+      const [values, setValues] = React.useState(defaults);
+      const setTweak = React.useCallback((keyOrEdits, val) => {
+        const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null
+          ? keyOrEdits : { [keyOrEdits]: val };
+        setValues((prev) => ({ ...prev, ...edits }));
+        window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+      }, []);
+      return [values, setTweak];
+    }
+
+    function TweaksPanel({ title = 'Tweaks', children }) {
+      const [open, setOpen] = React.useState(false);
+      const dragRef = React.useRef(null);
+      const offsetRef = React.useRef({ x: 16, y: 16 });
+      const PAD = 16;
+
+      const clampToViewport = React.useCallback(() => {
+        const panel = dragRef.current;
+        if (!panel) return;
+        const w = panel.offsetWidth, h = panel.offsetHeight;
+        const maxRight = Math.max(PAD, window.innerWidth - w - PAD);
+        const maxBottom = Math.max(PAD, window.innerHeight - h - PAD);
+        offsetRef.current = {
+          x: Math.min(maxRight, Math.max(PAD, offsetRef.current.x)),
+          y: Math.min(maxBottom, Math.max(PAD, offsetRef.current.y)),
+        };
+        panel.style.right = offsetRef.current.x + 'px';
+        panel.style.bottom = offsetRef.current.y + 'px';
+      }, []);
+
+      React.useEffect(() => {
+        if (!open) return;
+        clampToViewport();
+        if (typeof ResizeObserver === 'undefined') {
+          window.addEventListener('resize', clampToViewport);
+          return () => window.removeEventListener('resize', clampToViewport);
+        }
+        const ro = new ResizeObserver(clampToViewport);
+        ro.observe(document.documentElement);
+        return () => ro.disconnect();
+      }, [open, clampToViewport]);
+
+      React.useEffect(() => {
+        const onMsg = (e) => {
+          const t = e?.data?.type;
+          if (t === '__activate_edit_mode') setOpen(true);
+          else if (t === '__deactivate_edit_mode') setOpen(false);
+        };
+        window.addEventListener('message', onMsg);
+        window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+        return () => window.removeEventListener('message', onMsg);
+      }, []);
+
+      const dismiss = () => {
+        setOpen(false);
+        window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+      };
+
+      const onDragStart = (e) => {
+        const panel = dragRef.current;
+        if (!panel) return;
+        const r = panel.getBoundingClientRect();
+        const sx = e.clientX, sy = e.clientY;
+        const startRight = window.innerWidth - r.right;
+        const startBottom = window.innerHeight - r.bottom;
+        const move = (ev) => {
+          offsetRef.current = {
+            x: startRight - (ev.clientX - sx),
+            y: startBottom - (ev.clientY - sy),
+          };
+          clampToViewport();
+        };
+        const up = () => {
+          window.removeEventListener('mousemove', move);
+          window.removeEventListener('mouseup', up);
+        };
+        window.addEventListener('mousemove', move);
+        window.addEventListener('mouseup', up);
+      };
+
+      if (!open) return null;
+      return (
+        <>
+          <style>{__TWEAKS_STYLE}</style>
+          <div ref={dragRef} className="twk-panel" data-noncommentable=""
+            style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
+            <div className="twk-hd" onMouseDown={onDragStart}>
+              <b>{title}</b>
+              <button className="twk-x" aria-label="Close tweaks"
+                onMouseDown={(e) => e.stopPropagation()}
+                onClick={dismiss}>✕</button>
+            </div>
+            <div className="twk-body">{children}</div>
+          </div>
+        </>
+      );
+    }
+
+    function TweakSection({ label, children }) {
+      return (
+        <>
+          <div className="twk-sect">{label}</div>
+          {children}
+        </>
+      );
+    }
+
+    function TweakRow({ label, value, children, inline = false }) {
+      return (
+        <div className={inline ? 'twk-row twk-row-h' : 'twk-row'}>
+          <div className="twk-lbl">
+            <span>{label}</span>
+            {value != null && <span className="twk-val">{value}</span>}
+          </div>
+          {children}
+        </div>
+      );
+    }
+
+    function TweakSlider({ label, value, min = 0, max = 100, step = 1, unit = '', onChange }) {
+      return (
+        <TweakRow label={label} value={`${value}${unit}`}>
+          <input type="range" className="twk-slider" min={min} max={max} step={step}
+            value={value} onChange={(e) => onChange(Number(e.target.value))} />
+        </TweakRow>
+      );
+    }
+
+    function TweakToggle({ label, value, onChange }) {
+      return (
+        <div className="twk-row twk-row-h">
+          <div className="twk-lbl"><span>{label}</span></div>
+          <button type="button" className="twk-toggle" data-on={value ? '1' : '0'}
+            role="switch" aria-checked={!!value}
+            onClick={() => onChange(!value)}><i /></button>
+        </div>
+      );
+    }
+
+    function TweakRadio({ label, value, options, onChange }) {
+      const trackRef = React.useRef(null);
+      const [dragging, setDragging] = React.useState(false);
+      const opts = options.map((o) => (typeof o === 'object' ? o : { value: o, label: o }));
+      const idx = Math.max(0, opts.findIndex((o) => o.value === value));
+      const n = opts.length;
+
+      const valueRef = React.useRef(value);
+      valueRef.current = value;
+
+      const segAt = (clientX) => {
+        const r = trackRef.current.getBoundingClientRect();
+        const inner = r.width - 4;
+        const i = Math.floor(((clientX - r.left - 2) / inner) * n);
+        return opts[Math.max(0, Math.min(n - 1, i))].value;
+      };
+
+      const onPointerDown = (e) => {
+        setDragging(true);
+        const v0 = segAt(e.clientX);
+        if (v0 !== valueRef.current) onChange(v0);
+        const move = (ev) => {
+          if (!trackRef.current) return;
+          const v = segAt(ev.clientX);
+          if (v !== valueRef.current) onChange(v);
+        };
+        const up = () => {
+          setDragging(false);
+          window.removeEventListener('pointermove', move);
+          window.removeEventListener('pointerup', up);
+        };
+        window.addEventListener('pointermove', move);
+        window.addEventListener('pointerup', up);
+      };
+
+      return (
+        <TweakRow label={label}>
+          <div ref={trackRef} role="radiogroup" onPointerDown={onPointerDown}
+            className={dragging ? 'twk-seg dragging' : 'twk-seg'}>
+            <div className="twk-seg-thumb"
+              style={{
+                left: `calc(2px + ${idx} * (100% - 4px) / ${n})`,
+                width: `calc((100% - 4px) / ${n})`
+              }} />
+            {opts.map((o) => (
+              <button key={o.value} type="button" role="radio" aria-checked={o.value === value}>
+                {o.label}
+              </button>
+            ))}
+          </div>
+        </TweakRow>
+      );
+    }
+
+    function TweakSelect({ label, value, options, onChange }) {
+      return (
+        <TweakRow label={label}>
+          <select className="twk-field" value={value} onChange={(e) => onChange(e.target.value)}>
+            {options.map((o) => {
+              const v = typeof o === 'object' ? o.value : o;
+              const l = typeof o === 'object' ? o.label : o;
+              return <option key={v} value={v}>{l}</option>;
+            })}
+          </select>
+        </TweakRow>
+      );
+    }
+
+    function TweakText({ label, value, placeholder, onChange }) {
+      return (
+        <TweakRow label={label}>
+          <input className="twk-field" type="text" value={value} placeholder={placeholder}
+            onChange={(e) => onChange(e.target.value)} />
+        </TweakRow>
+      );
+    }
+
+    function TweakNumber({ label, value, min, max, step = 1, unit = '', onChange }) {
+      const clamp = (n) => {
+        if (min != null && n < min) return min;
+        if (max != null && n > max) return max;
+        return n;
+      };
+      const startRef = React.useRef({ x: 0, val: 0 });
+      const onScrubStart = (e) => {
+        e.preventDefault();
+        startRef.current = { x: e.clientX, val: value };
+        const decimals = (String(step).split('.')[1] || '').length;
+        const move = (ev) => {
+          const dx = ev.clientX - startRef.current.x;
+          const raw = startRef.current.val + dx * step;
+          const snapped = Math.round(raw / step) * step;
+          onChange(clamp(Number(snapped.toFixed(decimals))));
+        };
+        const up = () => {
+          window.removeEventListener('pointermove', move);
+          window.removeEventListener('pointerup', up);
+        };
+        window.addEventListener('pointermove', move);
+        window.addEventListener('pointerup', up);
+      };
+      return (
+        <div className="twk-num">
+          <span className="twk-num-lbl" onPointerDown={onScrubStart}>{label}</span>
+          <input type="number" value={value} min={min} max={max} step={step}
+            onChange={(e) => onChange(clamp(Number(e.target.value)))} />
+          {unit && <span className="twk-num-unit">{unit}</span>}
+        </div>
+      );
+    }
+
+    function TweakColor({ label, value, options, onChange }) {
+      return (
+        <div className="twk-row">
+          <div className="twk-lbl"><span>{label}</span></div>
+          {options && (
+            <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '6px' }}>
+              {options.map(c => (
+                <button key={c} type="button" onClick={() => onChange(c)} style={{
+                  width: '22px', height: '22px', borderRadius: '50%', border: value === c ? '2px solid #29261b' : '2px solid transparent',
+                  background: c, cursor: 'default', padding: 0, flexShrink: 0
+                }} />
+              ))}
+            </div>
+          )}
+          <input type="color" className="twk-swatch" value={value}
+            onChange={(e) => onChange(e.target.value)} />
+        </div>
+      );
+    }
+
+    function TweakButton({ label, onClick, secondary = false }) {
+      return (
+        <button type="button" className={secondary ? 'twk-btn secondary' : 'twk-btn'}
+          onClick={onClick}>{label}</button>
+      );
+    }
+
+    Object.assign(window, {
+      useTweaks, TweaksPanel, TweakSection, TweakRow,
+      TweakSlider, TweakToggle, TweakRadio, TweakSelect,
+      TweakText, TweakNumber, TweakColor, TweakButton,
+    });
+  </script>
+
+  <!-- Secciones (Nav, Hero, Services, Work, …) -->
+  <script type="text/babel">
+
+    const { useState, useEffect, useRef } = React;
+
+    /* ─── NAV ─────────────────────────────────────────────────────── */
+    function Nav() {
+      const [scrolled, setScrolled] = useState(false);
+      const [open, setOpen] = useState(false);
+
+      useEffect(() => {
+        const on = () => setScrolled(window.scrollY > 40);
+        window.addEventListener('scroll', on);
+        return () => window.removeEventListener('scroll', on);
+      }, []);
+
+      const scrollTo = (id) => {
+        setOpen(false);
+        const el = document.getElementById(id);
+        if (el) window.scrollTo({ top: el.offsetTop - 32, behavior: 'smooth' });
+      };
+
+      return (
+        <nav style={{
+          position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+          padding: '20px 32px',
+          background: scrolled ? 'color-mix(in srgb, var(--bg) 80%, transparent)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(16px) saturate(180%)' : 'none',
+          borderBottom: scrolled ? '1px solid var(--line)' : '1px solid transparent',
+          transition: 'all 0.3s ease',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        }}>
+          <a href="#top" onClick={(e) => { e.preventDefault(); scrollTo('top'); }} style={{
+            fontSize: '15px', fontWeight: 500, letterSpacing: '-0.02em',
+            display: 'flex', alignItems: 'center', gap: 0
+          }}>
+            <span>{DATA.brand}</span>
+            <span className="slash">/</span>
+            <span>{DATA.brandSlash}</span>
+          </a>
+
+          <div className="hide-mobile" style={{ display: 'flex', gap: '28px', alignItems: 'center', fontSize: '14px' }}>
+            {[
+              { id: 'services', label: 'experience' },
+              { id: 'work', label: 'work' },
+              { id: 'about', label: 'about' },
+            ].map(l => (
+              <button key={l.id} onClick={() => scrollTo(l.id)} style={{
+                background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text)',
+                fontSize: '14px', fontFamily: 'inherit', padding: 0, letterSpacing: '-0.01em',
+                display: 'inline-flex', alignItems: 'center'
+              }}>
+                <span className="slash">/</span>{l.label}
+              </button>
+            ))}
+            <a href={`mailto:${DATA.email}`} style={{
+              background: 'var(--text)', color: 'var(--bg)',
+              padding: '10px 18px', borderRadius: '999px',
+              fontSize: '13px', fontWeight: 500, letterSpacing: '-0.01em',
+              transition: 'transform 0.2s'
+            }}
+              onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.04)'}
+              onMouseLeave={e => e.currentTarget.style.transform = ''}>
+              let's connect →
+            </a>
+          </div>
+
+          <button onClick={() => setOpen(o => !o)} className="show-mobile" style={{
+            background: 'none', border: '1px solid var(--line)', padding: '8px 14px', borderRadius: '999px',
+            fontSize: '13px', color: 'var(--text)', cursor: 'pointer', display: 'none'
+          }}>{open ? 'close' : 'menu'}</button>
+
+          {open && (
+            <div style={{
+              position: 'fixed', top: '68px', left: 0, right: 0, bottom: 0,
+              background: 'var(--bg)', zIndex: 99, display: 'flex', flexDirection: 'column',
+              padding: '40px 24px', gap: '24px', borderTop: '1px solid var(--line)'
+            }}>
+              {['services', 'work', 'about'].map(id => (
+                <button key={id} onClick={() => scrollTo(id)} style={{
+                  background: 'none', border: 'none', cursor: 'pointer',
+                  fontSize: '32px', fontWeight: 500, letterSpacing: '-0.03em',
+                  color: 'var(--text)', textAlign: 'left', fontFamily: 'inherit'
+                }}>
+                  <span className="slash">/</span>{id}
+                </button>
+              ))}
+              <a href={`mailto:${DATA.email}`} style={{
+                marginTop: '12px', fontSize: '18px',
+                color: 'var(--accent)', fontStyle: 'italic', fontFamily: 'var(--serif)'
+              }}>let's connect →</a>
+            </div>
+          )}
+        </nav>
+      );
+    }
+
+    /* ─── HERO ────────────────────────────────────────────────────── */
+    function Hero() {
+      return (
+        <section id="top" style={{
+          minHeight: '100vh',
+          padding: '120px 32px 60px',
+          display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+          position: 'relative'
+        }}>
+          <div className="container" style={{ padding: 0, marginTop: '40px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <h1 className="hero-title">
+              {DATA.brand}<span className="slash">/</span>{DATA.brandSlash}
+            </h1>
+          </div>
+
+          <div className="container" style={{ padding: 0, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '32px', marginTop: '40px' }}>
+            <div style={{ maxWidth: '620px' }}>
+              <p style={{
+                fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)',
+                lineHeight: 1.4, letterSpacing: '-0.01em',
+                color: 'var(--text)'
+              }}>
+                {DATA.intro} <span className="slash">/</span>
+                <span style={{ fontFamily: 'var(--serif)', fontStyle: 'italic', fontWeight: 400 }}>{DATA.introBold}</span>
+              </p>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', alignItems: 'flex-start' }}>
+              <span className="num-mono" style={{ color: 'var(--muted)' }}>scroll</span>
+              <svg width="14" height="40" viewBox="0 0 14 40" fill="none">
+                <path d="M7 1V35M7 35L1 29M7 35L13 29" stroke="currentColor" strokeWidth="1.5" />
+              </svg>
+            </div>
+          </div>
+
+          <div style={{ position: 'absolute', top: '90px', right: '32px', textAlign: 'right' }}>
+            <div className="num-mono" style={{ color: 'var(--muted)' }}>{DATA.location}</div>
+            <div className="num-mono" style={{ color: 'var(--muted)' }}>est. 2016 — {DATA.year}</div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ─── MARQUEE ─────────────────────────────────────────────────── */
+    function Marquee({ text }) {
+      const items = Array(8).fill(text);
+      return (
+        <div style={{
+          borderTop: '1px solid var(--line)',
+          borderBottom: '1px solid var(--line)',
+          padding: '28px 0',
+          overflow: 'hidden',
+          background: 'var(--bg)'
+        }}>
+          <div className="marquee-track">
+            {items.map((t, i) => (
+              <div key={i} style={{
+                display: 'flex', alignItems: 'center', gap: '80px',
+                fontSize: 'clamp(1.6rem, 3.5vw, 3rem)',
+                fontWeight: 500, letterSpacing: '-0.03em', whiteSpace: 'nowrap'
+              }}>
+                <span style={{ color: 'var(--text)' }}>{t}</span>
+                <span style={{
+                  width: '14px', height: '14px', borderRadius: '50%',
+                  background: 'var(--accent)', display: 'inline-block', flexShrink: 0
+                }}></span>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    /* ─── SERVICES ────────────────────────────────────────────────── */
+    function ServiceItem({ num, title, desc, isLast }) {
+      const [open, setOpen] = useState(num === '01');
+      return (
+        <div className="reveal" style={{
+          borderTop: '1px solid var(--line)',
+          borderBottom: isLast ? '1px solid var(--line)' : 'none',
+          padding: '28px 0',
+          cursor: 'pointer',
+          transition: 'padding 0.3s ease'
+        }} onClick={() => setOpen(o => !o)}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '24px', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '20px', flex: 1 }}>
+              <span className="num-mono" style={{ color: 'var(--muted)', minWidth: '20px' }}>{num}</span>
+              <h3 style={{
+                fontSize: 'clamp(1.3rem, 2.5vw, 2.2rem)',
+                fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1.1,
+              }}>
+                <span className="slash">/</span>{title}
+              </h3>
+            </div>
+            <span style={{
+              fontSize: '24px', color: 'var(--accent)',
+              transform: open ? 'rotate(45deg)' : 'none', transition: 'transform 0.3s ease',
+              display: 'inline-block', lineHeight: 1
+            }}>+</span>
+          </div>
+          <div style={{
+            maxHeight: open ? '400px' : '0',
+            opacity: open ? 1 : 0,
+            overflow: 'hidden',
+            transition: 'max-height 0.5s ease, opacity 0.4s ease, margin-top 0.3s',
+            marginTop: open ? '16px' : '0'
+          }}>
+            <p style={{
+              color: 'var(--text-soft)',
+              fontSize: 'clamp(0.95rem, 1.1vw, 1.05rem)', lineHeight: 1.6,
+              maxWidth: '620px',
+              paddingLeft: '44px'
+            }}>{desc}</p>
+          </div>
+        </div>
+      );
+    }
+
+    function Services() {
+      return (
+        <section id="services" style={{ padding: '120px 0 80px' }}>
+          <div className="container">
+            <div className="svc-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1.6fr', gap: '48px', alignItems: 'start' }}>
+              <div style={{ position: 'sticky', top: '120px' }}>
+                <span className="num-mono" style={{ color: 'var(--muted)' }}>/services</span>
+                <h2 className="reveal" style={{
+                  fontSize: 'clamp(2.2rem, 5vw, 4rem)',
+                  fontWeight: 500, letterSpacing: '-0.04em', lineHeight: 0.95,
+                  marginTop: '8px'
+                }}>
+                  lo que <em style={{ fontFamily: 'var(--serif)', fontWeight: 400 }}>hago</em>.
+                </h2>
+                <p className="reveal" style={{
+                  marginTop: '24px', color: 'var(--text-soft)',
+                  fontSize: '15px', lineHeight: 1.6, maxWidth: '380px'
+                }}>
+                  Cinco direcciones donde combino diseño visual con pensamiento estratégico. No son silos — se solapan, se nutren entre sí, y al final hablan del mismo proyecto desde ángulos distintos.
+                </p>
+              </div>
+
+              <div>
+                {DATA.services.map((s, i) => (
+                  <ServiceItem key={s.num} {...s} isLast={i === DATA.services.length - 1} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ─── WORK / PROJECTS ─────────────────────────────────────────── */
+    const arrowBtn = (disabled) => ({
+      width: '44px', height: '44px', borderRadius: '50%',
+      border: '1px solid var(--line)', background: 'transparent',
+      color: 'var(--text)', cursor: disabled ? 'not-allowed' : 'pointer',
+      opacity: disabled ? 0.3 : 1, fontSize: '16px',
+      transition: 'all 0.2s', fontFamily: 'inherit'
+    });
+
+    function ProjectCard({ project: p, active, onClick }) {
+      return (
+        <article onClick={onClick} style={{
+          flex: '0 0 clamp(280px, 38vw, 560px)',
+          scrollSnapAlign: 'start',
+          cursor: 'pointer',
+          opacity: active ? 1 : 0.55,
+          transition: 'opacity 0.4s ease, transform 0.4s ease',
+          transform: active ? 'none' : 'scale(0.97)',
+        }}>
+          <div style={{
+            width: '100%',
+            aspectRatio: '4/3',
+            background: p.color,
+            borderRadius: '16px',
+            position: 'relative',
+            overflow: 'hidden',
+            marginBottom: '20px',
+          }}>
+            <svg width="100%" height="100%" style={{ position: 'absolute', inset: 0, opacity: 0.18 }} xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id={`grid-${p.id}`} width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M40 0L0 0 0 40" fill="none" stroke="white" strokeWidth="0.5" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill={`url(#grid-${p.id})`} />
+            </svg>
+            <span style={{
+              position: 'absolute', bottom: '-30px', right: '-20px',
+              fontSize: 'clamp(8rem, 18vw, 16rem)',
+              fontWeight: 600, letterSpacing: '-0.06em',
+              color: 'rgba(255,255,255,0.18)', lineHeight: 0.85,
+              pointerEvents: 'none', userSelect: 'none'
+            }}>{p.num}</span>
+            <span style={{
+              position: 'absolute', top: '20px', left: '20px',
+              background: 'rgba(0,0,0,0.4)', color: '#fff',
+              padding: '5px 12px', borderRadius: '999px',
+              fontSize: '11px', fontFamily: 'var(--mono)', letterSpacing: '0.04em',
+              backdropFilter: 'blur(8px)'
+            }}>{p.cat}</span>
+            <span style={{
+              position: 'absolute', top: '20px', right: '20px',
+              color: '#fff', fontFamily: 'var(--mono)', fontSize: '11px', letterSpacing: '0.04em',
+              opacity: 0.85
+            }}>{p.year}</span>
+          </div>
+          <div>
+            <h3 style={{
+              fontSize: 'clamp(1.1rem, 1.5vw, 1.4rem)',
+              fontWeight: 500, letterSpacing: '-0.02em',
+              marginBottom: '8px'
+            }}>
+              <span className="slash">/</span>{p.title}
+            </h3>
+            <p style={{ color: 'var(--text-soft)', fontSize: '14px', lineHeight: 1.5 }}>{p.desc}</p>
+            <a href={p.href} style={{
+              marginTop: '14px', display: 'inline-flex', alignItems: 'center', gap: '6px',
+              color: 'var(--accent)', fontStyle: 'italic',
+              fontFamily: 'var(--serif)', fontSize: '18px'
+            }}>ver caso →</a>
+          </div>
+        </article>
+      );
+    }
+
+    function Work() {
+      const [idx, setIdx] = useState(0);
+      const trackRef = useRef(null);
+      const next = () => setIdx(i => Math.min(DATA.projects.length - 1, i + 1));
+      const prev = () => setIdx(i => Math.max(0, i - 1));
+
+      useEffect(() => {
+        if (trackRef.current) {
+          const card = trackRef.current.children[idx];
+          if (card) {
+            const target = card.offsetLeft - 32;
+            trackRef.current.scrollTo({ left: target, behavior: 'smooth' });
+          }
+        }
+      }, [idx]);
+
+      return (
+        <section id="work" style={{ padding: '120px 0 80px' }}>
+          <div className="container" style={{ marginBottom: '48px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '24px' }}>
+              <div>
+                <span className="num-mono" style={{ color: 'var(--muted)' }}>/work</span>
+                <h2 className="reveal" style={{
+                  fontSize: 'clamp(2.4rem, 6vw, 5.5rem)',
+                  fontWeight: 500, letterSpacing: '-0.04em', lineHeight: 0.95,
+                  marginTop: '8px'
+                }}>
+                  <span className="slash">/</span>proyectos que <em style={{ fontFamily: 'var(--serif)', fontWeight: 400 }}>dejaron huella</em>.
+                </h2>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                <span className="num-mono" style={{ color: 'var(--muted)' }}>
+                  {String(idx + 1).padStart(2, '0')} / {String(DATA.projects.length).padStart(2, '0')}
+                </span>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <button onClick={prev} disabled={idx === 0} style={arrowBtn(idx === 0)}>←</button>
+                  <button onClick={next} disabled={idx === DATA.projects.length - 1} style={arrowBtn(idx === DATA.projects.length - 1)}>→</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div ref={trackRef} style={{
+            display: 'flex', gap: '24px',
+            padding: '0 32px 24px',
+            overflowX: 'auto', scrollSnapType: 'x mandatory',
+            scrollbarWidth: 'none'
+          }}>
+            {DATA.projects.map((p, i) => (
+              <ProjectCard key={p.id} project={p} active={i === idx} onClick={() => setIdx(i)} />
+            ))}
+            <div style={{ minWidth: '32px', flexShrink: 0 }}></div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ─── TESTIMONIALS ────────────────────────────────────────────── */
+    function Testimonials() {
+      return (
+        <section style={{ padding: '120px 0 80px', background: 'var(--bg)', borderTop: '1px solid var(--line)' }}>
+          <div className="container" style={{ marginBottom: '56px' }}>
+            <span className="num-mono" style={{ color: 'var(--muted)' }}>/testimonials</span>
+            <h2 className="reveal" style={{
+              fontSize: 'clamp(2.2rem, 5vw, 4rem)',
+              fontWeight: 500, letterSpacing: '-0.04em', lineHeight: 0.95,
+              marginTop: '8px'
+            }}>
+              <span className="slash">/</span>lo que <em style={{ fontFamily: 'var(--serif)', fontWeight: 400 }}>dicen</em>.
+            </h2>
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 380px), 1fr))',
+            gap: '1px',
+            background: 'var(--line)',
+            borderTop: '1px solid var(--line)',
+            borderBottom: '1px solid var(--line)',
+          }}>
+            {DATA.testimonials.map((t, i) => (
+              <div key={i} className="reveal" style={{
+                background: 'var(--bg)', padding: '36px 32px',
+                display: 'flex', flexDirection: 'column', gap: '24px',
+                minHeight: '280px'
+              }}>
+                <span style={{ fontSize: '40px', color: 'var(--accent)', fontFamily: 'var(--serif)', lineHeight: 0.6, fontStyle: 'italic' }}>"</span>
+                <p style={{
+                  flex: 1, fontSize: '15px', lineHeight: 1.55,
+                  color: 'var(--text)', letterSpacing: '-0.01em'
+                }}>{t.text}</p>
+                <div style={{ borderTop: '1px solid var(--line)', paddingTop: '14px' }}>
+                  <div style={{ fontSize: '14px', fontWeight: 500, letterSpacing: '-0.01em' }}>{t.name}</div>
+                  <div className="num-mono" style={{ color: 'var(--muted)', marginTop: '2px' }}>{t.role}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    /* ─── ABOUT ───────────────────────────────────────────────────── */
+    function About() {
+      return (
+        <section id="about" style={{ padding: '120px 0 80px' }}>
+          <div className="container">
+            <div className="about-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: '56px', alignItems: 'start' }}>
+              <div>
+                <span className="num-mono" style={{ color: 'var(--muted)' }}>/about</span>
+                <h2 className="reveal" style={{
+                  fontSize: 'clamp(2.2rem, 5vw, 4.5rem)',
+                  fontWeight: 500, letterSpacing: '-0.04em', lineHeight: 0.95,
+                  marginTop: '8px'
+                }}>
+                  <span className="slash">/</span>detrás del <em style={{ fontFamily: 'var(--serif)', fontWeight: 400 }}>trabajo</em>.
+                </h2>
+              </div>
+
+              <div>
+                <p className="reveal" style={{
+                  fontSize: 'clamp(1.2rem, 1.9vw, 1.6rem)',
+                  lineHeight: 1.4, letterSpacing: '-0.01em',
+                  color: 'var(--text)', marginBottom: '40px'
+                }}>{DATA.about}</p>
+
+                <div className="reveal" style={{ marginTop: '40px', marginBottom: '40px' }}>
+                  <div className="num-mono" style={{ color: 'var(--muted)', marginBottom: '16px' }}>/toolbox</div>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                    {DATA.skills.map(s => (
+                      <span key={s} style={{
+                        fontSize: '13px', padding: '6px 12px',
+                        border: '1px solid var(--line)', borderRadius: '999px',
+                        color: 'var(--text)', transition: 'all 0.2s'
+                      }}
+                        onMouseEnter={e => { e.target.style.borderColor = 'var(--accent)'; e.target.style.color = 'var(--accent)'; }}
+                        onMouseLeave={e => { e.target.style.borderColor = 'var(--line)'; e.target.style.color = 'var(--text)'; }}>{s}</span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="reveal">
+                  <div className="num-mono" style={{ color: 'var(--muted)', marginBottom: '12px' }}>/elsewhere</div>
+                  {DATA.links.map((l, i) => (
+                    <a key={i} href={l.href} target="_blank" rel="noopener" style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                      padding: '18px 0', borderTop: '1px solid var(--line)',
+                      borderBottom: i === DATA.links.length - 1 ? '1px solid var(--line)' : 'none',
+                      fontSize: '15px', letterSpacing: '-0.01em',
+                      transition: 'padding 0.3s, color 0.3s'
+                    }}
+                      onMouseEnter={e => { e.currentTarget.style.paddingLeft = '12px'; e.currentTarget.style.color = 'var(--accent)'; }}
+                      onMouseLeave={e => { e.currentTarget.style.paddingLeft = '0'; e.currentTarget.style.color = 'var(--text)'; }}>
+                      <span style={{ display: 'flex', alignItems: 'baseline', gap: '12px' }}>
+                        <span className="num-mono" style={{ color: 'var(--muted)', minWidth: '70px' }}>/{l.kind}</span>
+                        <span>{l.title}</span>
+                      </span>
+                      <span style={{ fontSize: '14px' }}>↗</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ─── CONNECT ─────────────────────────────────────────────────── */
+    function ConnectBlock() {
+      return (
+        <section style={{ padding: '120px 0 80px', borderTop: '1px solid var(--line)' }}>
+          <div className="container" style={{ textAlign: 'center' }}>
+            <div className="num-mono" style={{ color: 'var(--muted)', marginBottom: '16px' }}>/connect</div>
+            <h2 className="reveal cursor-blink" style={{
+              fontSize: 'clamp(2.4rem, 8vw, 7.5rem)',
+              fontWeight: 500, letterSpacing: '-0.05em', lineHeight: 0.9,
+              marginBottom: '40px'
+            }}>
+              ¿hablamos<span className="slash">?</span>
+            </h2>
+            <a href={`mailto:${DATA.email}`} style={{
+              display: 'inline-block',
+              fontSize: 'clamp(1.4rem, 3vw, 2.4rem)',
+              fontStyle: 'italic', fontFamily: 'var(--serif)', fontWeight: 400,
+              color: 'var(--accent)',
+              borderBottom: '1px solid currentColor', paddingBottom: '4px'
+            }}>
+              send an email →
+            </a>
+            <div style={{
+              marginTop: '48px', display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap',
+              fontSize: '14px'
+            }}>
+              <a href={DATA.linkedin} target="_blank" rel="noopener" className="hover-line">linkedin <span style={{ fontSize: '10px' }}>↗</span></a>
+              <a href={`mailto:${DATA.email}`} className="hover-line">email <span style={{ fontSize: '10px' }}>↗</span></a>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────────────── */
+    function Footer() {
+      return (
+        <footer style={{
+          borderTop: '1px solid var(--line)',
+          padding: '40px 32px',
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px'
+        }}>
+          <div className="num-mono" style={{ color: 'var(--muted)' }}>
+            © {DATA.year} {DATA.fullName} · {DATA.location} · all rights reserved.
+          </div>
+          <div className="num-mono" style={{ color: 'var(--muted)' }}>
+            <span className="slash">/</span>vibe-coded with care.
+          </div>
+        </footer>
+      );
+    }
+
+    Object.assign(window, {
+      Nav, Hero, Marquee,
+      Services, ServiceItem,
+      Work, ProjectCard,
+      Testimonials, About, ConnectBlock, Footer,
+    });
+  </script>
+
+  <!-- App principal — debe ir al final, depende de todo lo anterior -->
+  <script type="text/babel">
+
+    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "accent": "#504FED",
+      "mode": "light",
+      "marqueeText": "available for freelance · disponible para colaboraciones · 2026"
+    }/*EDITMODE-END*/;
+
+    function MyTweaks({ tweaks, setTweak }) {
+      return (
+        <TweaksPanel title="Tweaks">
+          <TweakSection label="Modo">
+            <TweakRadio
+              id="mode" label="Tema" value={tweaks.mode}
+              options={[
+                { value: 'light', label: 'Light' },
+                { value: 'dark', label: 'Dark' },
+              ]}
+              onChange={v => setTweak('mode', v)}
+            />
+          </TweakSection>
+          <TweakSection label="Color de marca">
+            <TweakColor
+              id="accent" label="Acento" value={tweaks.accent}
+              options={['#504FED', '#E84A3F', '#0E8A5A', '#E0A82E', '#0E0E0E', '#7A5BD8']}
+              onChange={v => setTweak('accent', v)}
+            />
+          </TweakSection>
+          <TweakSection label="Marquee">
+            <TweakText
+              id="marqueeText" label="Texto" value={tweaks.marqueeText}
+              onChange={v => setTweak('marqueeText', v)}
+            />
+          </TweakSection>
+        </TweaksPanel>
+      );
+    }
+
+    function App() {
+      const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+      React.useEffect(() => {
+        document.body.setAttribute('data-mode', tweaks.mode);
+        document.documentElement.style.setProperty('--accent', tweaks.accent);
+      }, [tweaks.mode, tweaks.accent]);
+
+      React.useEffect(() => {
+        const els = document.querySelectorAll('.reveal');
+        const obs = new IntersectionObserver(entries => {
+          entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.12 });
+        els.forEach(el => obs.observe(el));
+        return () => obs.disconnect();
+      });
+
+      return (
+        <>
+          <Nav />
+          <Hero />
+          <Marquee text={tweaks.marqueeText} />
+          <Services />
+          <Work />
+          <Testimonials />
+          <About />
+          <ConnectBlock />
+          <Footer />
+          <MyTweaks tweaks={tweaks} setTweak={setTweak} />
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+
+</html>
