@@ -120,6 +120,22 @@ a { color: inherit; text-decoration: none; }
   to   { transform-origin: left; transform: scaleX(1); }
 }
 
+/* ─── About CTA button ────────────────────────────────────────── */
+.about-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 32px;
+  padding: 12px 24px;
+  border: 1px solid var(--text);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  background: transparent;
+  transition: background 0.2s, color 0.2s;
+}
+
 /* ─── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .container { padding: 0 20px; }
