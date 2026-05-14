@@ -1,138 +1,288 @@
-<!DOCTYPE html>
-<html lang="es">
+/* ─── About page ──────────────────────────────────────────────── */
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>about — Roger A. · Visual Designer & Marketing Assistant</title>
-  <meta name="description" content="Sobre Roger Avellana — Visual Designer & Marketing Assistant." />
-  <meta name="theme-color" content="#504FED" />
+/* Nav */
+.about-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid var(--line);
+}
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet" />
+.about-nav-brand {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
 
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="about.css" />
-</head>
+.about-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-size: 14px;
+}
 
-<body data-mode="light">
+.about-nav-links a {
+  letter-spacing: -0.01em;
+  color: var(--text);
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
 
-  <!-- NAV -->
-  <nav class="about-nav">
-    <a href="index.html" class="about-nav-brand">
-      <span>Roger</span><span class="slash">/</span><span>Marketing</span>
-    </a>
-    <div class="about-nav-links">
-      <a href="index.html#services">/<span>experience</span></a>
-      <a href="index.html#work">/<span>work</span></a>
-      <a href="about.html" class="active">/<span>about</span></a>
-      <a href="mailto:roger.ar123@gmail.com" class="about-nav-cta">let's connect →</a>
-    </div>
-    <button class="about-nav-burger" onclick="toggleMenu()" aria-label="menu">menu</button>
-  </nav>
+.about-nav-links a:hover,
+.about-nav-links a.active {
+  opacity: 1;
+}
 
-  <!-- MOBILE MENU -->
-  <div class="about-mobile-menu" id="mobileMenu">
-    <a href="index.html#services" onclick="toggleMenu()">/experience</a>
-    <a href="index.html#work" onclick="toggleMenu()">/work</a>
-    <a href="about.html" onclick="toggleMenu()">/about</a>
-    <a href="mailto:roger.ar123@gmail.com" class="about-mobile-cta">let's connect →</a>
-  </div>
+.about-nav-cta {
+  background: var(--text);
+  color: var(--bg) !important;
+  opacity: 1 !important;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: transform 0.2s !important;
+}
 
-  <!-- ABOUT LAYOUT -->
-  <main class="about-layout">
+.about-nav-cta:hover {
+  transform: scale(1.04);
+}
 
-    <!-- Columna izquierda -->
-    <div class="about-col-left">
-      <h1 class="about-greeting">
-        Hola, soy <em>Roger.</em>
-      </h1>
-      <p class="about-bio">
-        Roger Avellana. Diseñador visual y digital con más de ocho años de experiencia en proyectos de identidad de marca, UI/UX y comunicación digital. Actualmente ampliando el perfil hacia el marketing digital y la estrategia de comunicación, con especial interés en la intersección entre diseño de sistemas y herramientas de IA aplicadas al proceso creativo.
-      </p>
-      <p class="about-contact">
-        Escríbeme a
-        <a href="mailto:roger.ar123@gmail.com">send an email</a>
-        o en
-        <a href="https://www.linkedin.com/in/roger-avellana/" target="_blank" rel="noopener">LinkedIn</a>.
-      </p>
+.about-nav-burger {
+  display: none;
+  background: none;
+  border: 1px solid var(--line);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
+  cursor: pointer;
+}
 
-      <!-- Experience -->
-      <div class="about-block">
-        <p class="about-section-label">Experience</p>
-        <div class="about-exp-row">
-          <span><strong>Intera</strong> <span class="muted">/ Diseño Visual &amp; Estrategia Digital</span></span>
-          <span class="mono">2023–2026</span>
-        </div>
-        <div class="about-exp-row">
-          <span><strong>nVision Systems</strong> <span class="muted">/ Ferias Internacionales</span></span>
-          <span class="mono">2021–2023</span>
-        </div>
-        <div class="about-exp-row">
-          <span><strong>Sensing &amp; Control</strong> <span class="muted">/ UI/UX · Dashboard IoT</span></span>
-          <span class="mono">2019–2021</span>
-        </div>
-        <div class="about-exp-row">
-          <span><strong>Ayuntamiento de Igualada</strong> <span class="muted">/ Campañas Municipales</span></span>
-          <span class="mono">2018–2019</span>
-        </div>
-      </div>
+/* Mobile menu */
+.about-mobile-menu {
+  display: none;
+  position: fixed;
+  top: 68px; left: 0; right: 0; bottom: 0;
+  background: var(--bg);
+  z-index: 99;
+  flex-direction: column;
+  padding: 40px 24px;
+  gap: 24px;
+  border-top: 1px solid var(--line);
+}
 
-      <!-- Education -->
-      <div class="about-block">
-        <p class="about-section-label">Education</p>
-        <div class="about-exp-row">
-          <span><strong>Escola Superior de Disseny</strong> <span class="muted">/ Diseño Gráfico</span></span>
-          <span class="mono">2016</span>
-        </div>
-        <div class="about-exp-row">
-          <span><strong>Universitat Oberta de Catalunya</strong> <span class="muted">/ Interacción Digital y Multimedia</span></span>
-          <span class="mono">2020</span>
-        </div>
-        <div class="about-exp-row">
-          <span><strong>Universitat de Barcelona</strong> <span class="muted">/ Posgrado Marketing Digital, E-Commerce &amp; Social Media</span></span>
-          <span class="mono">2026</span>
-        </div>
-      </div>
-    </div>
+.about-mobile-menu.open { display: flex; }
 
-    <!-- Columna central: foto portrait -->
-    <div class="about-col-center">
-      <!-- Reemplaza este div por: <img src="tu-foto.jpg" alt="Roger Avellana" /> -->
-      <span class="photo-label">portrait</span>
-    </div>
+.about-mobile-menu a {
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
 
-    <!-- Columna derecha: dos fotos -->
-    <div class="about-col-right">
-      <div class="about-photo-top">
-        <!-- Reemplaza por: <img src="foto-01.jpg" alt="" /> -->
-        <span class="photo-label">photo 01</span>
-      </div>
-      <div class="about-photo-bottom">
-        <!-- Reemplaza por: <img src="foto-02.jpg" alt="" /> -->
-        <span class="photo-label">photo 02</span>
-      </div>
-    </div>
+.about-mobile-cta {
+  margin-top: 12px;
+  font-size: 18px !important;
+  color: var(--accent) !important;
+  font-style: italic;
+  font-family: var(--serif);
+}
 
-  </main>
+/* Layout grid */
+.about-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  min-height: calc(100vh - 68px);
+  margin-top: 68px;
+  border-bottom: 1px solid var(--line);
+}
 
-  <!-- FOOTER -->
-  <footer class="about-footer">
-    <span class="mono">© 2026 Roger Avellana · Barcelona · Catalunya · all rights reserved.</span>
-    <span class="mono"><span class="slash">/</span>vibe-coded with care.</span>
-  </footer>
+/* Left column */
+.about-col-left {
+  padding: 64px 40px;
+  border-right: 1px solid var(--line);
+  overflow-y: auto;
+}
 
-  <script>
-    function toggleMenu() {
-      const m = document.getElementById('mobileMenu');
-      m.classList.toggle('open');
-    }
-  </script>
+.about-greeting {
+  font-size: clamp(1.8rem, 2.8vw, 2.8rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
 
-</body>
-</html>
+.about-greeting em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.about-bio {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-soft);
+  max-width: 360px;
+}
+
+.about-contact {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+.about-contact a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.about-block {
+  margin-top: 48px;
+}
+
+.about-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.about-exp-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  letter-spacing: -0.01em;
+}
+
+.about-exp-row strong { font-weight: 500; }
+
+.muted { color: var(--muted); }
+.mono { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: var(--muted); flex-shrink: 0; }
+.slash { color: var(--accent); font-weight: 700; }
+
+/* Center column: portrait */
+.about-col-center {
+  background: var(--muted);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 12px;
+  min-height: 400px;
+}
+
+.about-col-center img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Right column: two photos */
+.about-col-right {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--line);
+}
+
+.about-photo-top {
+  flex: 1;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--accent) 10%, var(--bg));
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-photo-bottom {
+  flex: 1;
+  background: color-mix(in srgb, var(--muted) 20%, var(--bg));
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-photo-top img,
+.about-photo-bottom img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.35);
+  position: relative;
+  z-index: 1;
+}
+
+/* Footer */
+.about-footer {
+  border-top: 1px solid var(--line);
+  padding: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .about-nav-links { display: none; }
+  .about-nav-burger { display: block; }
+
+  .about-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .about-col-left {
+    border-right: none;
+  }
+
+  .about-col-center {
+    min-height: 380px;
+  }
+
+  .about-col-right {
+    flex-direction: row;
+    min-height: 220px;
+    border-left: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .about-photo-top {
+    border-bottom: none;
+    border-right: 1px solid var(--line);
+  }
+}
