@@ -26,7 +26,7 @@ function MyTweaks({ tweaks, setTweak }) {
           id="mode" label="Tema" value={tweaks.mode}
           options={[
             { value: 'light', label: 'Light' },
-            { value: 'dark',  label: 'Dark' },
+            { value: 'dark', label: 'Dark' },
           ]}
           onChange={v => setTweak('mode', v)}
         />
