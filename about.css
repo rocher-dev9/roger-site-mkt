@@ -174,11 +174,22 @@
 
 .muted { color: var(--muted); }
 .mono { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: var(--muted); flex-shrink: 0; }
-.slash { color: var(--accent); font-weight: 700; }
+
+/* Canvas gradient animation */
+#canvas-portrait,
+#canvas-photo1,
+#canvas-photo2 {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
 
 /* Center column: portrait */
 .about-col-center {
-  background: var(--muted);
+  position: relative;
+  background: #07071a;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
@@ -204,7 +215,7 @@
 .about-photo-top {
   flex: 1;
   border-bottom: 1px solid var(--line);
-  background: color-mix(in srgb, var(--accent) 10%, var(--bg));
+  background: #080814;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
@@ -215,7 +226,7 @@
 
 .about-photo-bottom {
   flex: 1;
-  background: color-mix(in srgb, var(--muted) 20%, var(--bg));
+  background: #090710;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
