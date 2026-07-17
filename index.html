@@ -508,6 +508,18 @@
 
     const { useState, useEffect, useRef } = React;
 
+    /* ─── BACKGROUND AMBIENT BLOBS ─────────────────────────────────── */
+    function BackgroundBlobs() {
+      return (
+        <div className="bg-ambi" aria-hidden="true">
+          <div className="bg-ambi-blob bab-1" />
+          <div className="bg-ambi-blob bab-2" />
+          <div className="bg-ambi-blob bab-3" />
+          <div className="bg-ambi-blob bab-4" />
+        </div>
+      );
+    }
+
     /* ─── NAV ─────────────────────────────────────────────────────── */
     function Nav() {
       const [scrolled, setScrolled] = useState(false);
@@ -526,13 +538,19 @@
       };
 
       return (
-        <nav style={{
+        <nav className={scrolled ? 'gl-nav' : ''} style={{
           position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
           padding: '20px 32px',
-          background: scrolled ? 'color-mix(in srgb, var(--bg) 80%, transparent)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(16px) saturate(180%)' : 'none',
-          borderBottom: scrolled ? '1px solid var(--line)' : '1px solid transparent',
-          transition: 'all 0.3s ease',
+          background: scrolled
+            ? 'color-mix(in srgb, var(--bg) 62%, transparent)'
+            : 'transparent',
+          backdropFilter: scrolled ? 'blur(24px) saturate(200%) brightness(1.04)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(24px) saturate(200%) brightness(1.04)' : 'none',
+          borderBottom: scrolled ? '1px solid var(--gm-border)' : '1px solid transparent',
+          boxShadow: scrolled
+            ? '0 1px 0 rgba(255,255,255,0.55) inset, 0 4px 24px rgba(14,14,14,0.07)'
+            : 'none',
+          transition: 'background 0.35s ease, backdrop-filter 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         }}>
           <a href="#top" onClick={(e) => { e.preventDefault(); scrollTo('top'); }} style={{
@@ -768,7 +786,9 @@
           borderBottom: '1px solid var(--line)',
           padding: '28px 0',
           overflow: 'hidden',
-          background: 'var(--bg)'
+          background: 'color-mix(in srgb, var(--bg) 70%, transparent)',
+          backdropFilter: 'blur(8px) saturate(140%)',
+          WebkitBackdropFilter: 'blur(8px) saturate(140%)',
         }}>
           <div className="marquee-track">
             {items.map((t, i) => (
@@ -796,9 +816,14 @@
         <div className="reveal" style={{
           borderTop: '1px solid var(--line)',
           borderBottom: isLast ? '1px solid var(--line)' : 'none',
-          padding: '28px 0',
+          padding: open ? '28px 16px' : '28px 0',
           cursor: 'pointer',
-          transition: 'padding 0.3s ease'
+          borderRadius: open ? '12px' : '0',
+          background: open ? 'var(--gm-bg)' : 'transparent',
+          backdropFilter: open ? 'blur(10px) saturate(140%)' : 'none',
+          WebkitBackdropFilter: open ? 'blur(10px) saturate(140%)' : 'none',
+          boxShadow: open ? 'inset 0 1px 0 rgba(255,255,255,0.45)' : 'none',
+          transition: 'padding 0.35s ease, background 0.35s ease, box-shadow 0.35s ease, border-radius 0.35s ease'
         }} onClick={() => setOpen(o => !o)}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '24px', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '20px', flex: 1 }}>
@@ -877,23 +902,27 @@
     });
 
     function ProjectCard({ project: p, active, onClick }) {
+      const trackMouse = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+        const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+        e.currentTarget.style.setProperty('--mx', x + '%');
+        e.currentTarget.style.setProperty('--my', y + '%');
+      };
+
       return (
         <article onClick={onClick} style={{
           flex: '0 0 clamp(280px, 38vw, 560px)',
           scrollSnapAlign: 'start',
           cursor: 'pointer',
-          opacity: active ? 1 : 0.55,
-          transition: 'opacity 0.4s ease, transform 0.4s ease',
-          transform: active ? 'none' : 'scale(0.97)',
+          opacity: active ? 1 : 0.6,
+          transition: 'opacity 0.4s ease',
         }}>
+          {/* Coloured thumbnail — unchanged */}
           <div style={{
-            width: '100%',
-            aspectRatio: '4/3',
-            background: p.color,
-            borderRadius: '16px',
-            position: 'relative',
-            overflow: 'hidden',
-            marginBottom: '20px',
+            width: '100%', aspectRatio: '4/3',
+            background: p.color, borderRadius: '16px',
+            position: 'relative', overflow: 'hidden', marginBottom: '16px',
           }}>
             <svg width="100%" height="100%" style={{ position: 'absolute', inset: 0, opacity: 0.18 }} xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -912,7 +941,7 @@
             }}>{p.num}</span>
             <span style={{
               position: 'absolute', top: '20px', left: '20px',
-              background: 'rgba(0,0,0,0.4)', color: '#fff',
+              background: 'rgba(0,0,0,0.35)', color: '#fff',
               padding: '5px 12px', borderRadius: '999px',
               fontSize: '11px', fontFamily: 'var(--mono)', letterSpacing: '0.04em',
               backdropFilter: 'blur(8px)'
@@ -923,11 +952,13 @@
               opacity: 0.85
             }}>{p.year}</span>
           </div>
-          <div>
+
+          {/* Glass text panel */}
+          <div className="gl-card" onMouseMove={trackMouse}
+            style={{ padding: '20px 22px 22px' }}>
             <h3 style={{
-              fontSize: 'clamp(1.1rem, 1.5vw, 1.4rem)',
-              fontWeight: 500, letterSpacing: '-0.02em',
-              marginBottom: '8px'
+              fontSize: 'clamp(1.05rem, 1.4vw, 1.3rem)',
+              fontWeight: 500, letterSpacing: '-0.02em', marginBottom: '8px'
             }}>
               <span className="slash">/</span>{p.title}
             </h3>
@@ -1001,8 +1032,16 @@
 
     /* ─── TESTIMONIALS ────────────────────────────────────────────── */
     function Testimonials() {
+      const trackMouse = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+        const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+        e.currentTarget.style.setProperty('--mx', x + '%');
+        e.currentTarget.style.setProperty('--my', y + '%');
+      };
+
       return (
-        <section style={{ padding: '120px 0 80px', background: 'var(--bg)', borderTop: '1px solid var(--line)' }}>
+        <section style={{ padding: '120px 0 80px', borderTop: '1px solid var(--line)' }}>
           <div className="container" style={{ marginBottom: '56px' }}>
             <span className="num-mono" style={{ color: 'var(--muted)' }}>/testimonials</span>
             <h2 className="reveal" style={{
@@ -1023,11 +1062,13 @@
             borderBottom: '1px solid var(--line)',
           }}>
             {DATA.testimonials.map((t, i) => (
-              <div key={i} className="reveal" style={{
-                background: 'var(--bg)', padding: '36px 32px',
-                display: 'flex', flexDirection: 'column', gap: '24px',
-                minHeight: '280px'
-              }}>
+              <div key={i} className="reveal gl-testi" onMouseMove={trackMouse}
+                style={{
+                  background: 'var(--gm-bg)',
+                  padding: '36px 32px',
+                  display: 'flex', flexDirection: 'column', gap: '24px',
+                  minHeight: '280px'
+                }}>
                 <span style={{ fontSize: '40px', color: 'var(--accent)', fontFamily: 'var(--serif)', lineHeight: 0.6, fontStyle: 'italic' }}>"</span>
                 <p style={{
                   flex: 1, fontSize: '15px', lineHeight: 1.55,
@@ -1077,13 +1118,11 @@
                   <div className="num-mono" style={{ color: 'var(--muted)', marginBottom: '16px' }}>/toolbox</div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                     {DATA.skills.map(s => (
-                      <span key={s} style={{
+                      <span key={s} className="gl-tag" style={{
                         fontSize: '13px', padding: '6px 12px',
-                        border: '1px solid var(--line)', borderRadius: '999px',
-                        color: 'var(--text)', transition: 'all 0.2s'
-                      }}
-                        onMouseEnter={e => { e.target.style.borderColor = 'var(--accent)'; e.target.style.color = 'var(--accent)'; }}
-                        onMouseLeave={e => { e.target.style.borderColor = 'var(--line)'; e.target.style.color = 'var(--text)'; }}>{s}</span>
+                        borderRadius: '999px', color: 'var(--text)',
+                        display: 'inline-block'
+                      }}>{s}</span>
                     ))}
                   </div>
                 </div>
@@ -1128,21 +1167,29 @@
             }}>
               ¿hablamos<span className="slash">?</span>
             </h2>
-            <a href={`mailto:${DATA.email}`} style={{
+            <a href={`mailto:${DATA.email}`} className="gl-cta" style={{
               display: 'inline-block',
               fontSize: 'clamp(1.4rem, 3vw, 2.4rem)',
               fontStyle: 'italic', fontFamily: 'var(--serif)', fontWeight: 400,
               color: 'var(--accent)',
-              borderBottom: '1px solid currentColor', paddingBottom: '4px'
+              padding: '14px 32px',
+              borderRadius: '999px',
+              textDecoration: 'none'
             }}>
               send an email →
             </a>
             <div style={{
-              marginTop: '48px', display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap',
+              marginTop: '48px', display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap',
               fontSize: '14px'
             }}>
-              <a href={DATA.linkedin} target="_blank" rel="noopener" className="hover-line">linkedin <span style={{ fontSize: '10px' }}>↗</span></a>
-              <a href={`mailto:${DATA.email}`} className="hover-line">email <span style={{ fontSize: '10px' }}>↗</span></a>
+              <a href={DATA.linkedin} target="_blank" rel="noopener" className="gl-tag hover-line"
+                style={{ padding: '8px 16px', borderRadius: '999px', textDecoration: 'none' }}>
+                linkedin <span style={{ fontSize: '10px' }}>↗</span>
+              </a>
+              <a href={`mailto:${DATA.email}`} className="gl-tag hover-line"
+                style={{ padding: '8px 16px', borderRadius: '999px', textDecoration: 'none' }}>
+                email <span style={{ fontSize: '10px' }}>↗</span>
+              </a>
             </div>
           </div>
         </section>
@@ -1252,6 +1299,7 @@
       Services, ServiceItem,
       Work, ProjectCard,
       Testimonials, About, ConnectBlock, Footer,
+      BackgroundBlobs,
     });
   </script>
 
@@ -1313,6 +1361,7 @@
 
       return (
         <>
+          <BackgroundBlobs />
           <Nav />
           <Hero />
           <Marquee text={tweaks.marqueeText} />
