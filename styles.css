@@ -31,6 +31,11 @@ body {
   overflow-x: hidden;
   font-feature-settings: 'ss01', 'ss02';
 }
+#root {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+}
 a { color: inherit; text-decoration: none; }
 
 ::selection { background: var(--accent); color: #fff; }
@@ -142,8 +147,8 @@ a { color: inherit; text-decoration: none; }
   to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes heroWordIn {
-  from { opacity: 0; filter: blur(32px); }
-  to   { opacity: 1; filter: blur(6px); }
+  from { opacity: 0; filter: blur(28px); }
+  to   { opacity: 1; filter: blur(0px); }
 }
 @keyframes orbFloat {
   from { transform: translateX(-50%) translateY(0); }
@@ -158,11 +163,245 @@ a { color: inherit; text-decoration: none; }
   50%       { transform: translateY(9px); opacity: 0.7; }
 }
 .hero-glow-word {
-  filter: blur(6px);
   text-shadow:
-    0 0 30px rgba(255,255,255,1),
-    0 0 80px rgba(255,255,255,0.7),
-    0 0 180px rgba(140,180,255,0.4);
+    0 0 20px rgba(255,255,255,0.9),
+    0 0 60px rgba(255,255,255,0.5),
+    0 0 120px rgba(140,180,255,0.3);
+}
+
+/* ─── Glass system tokens ─────────────────────────────────────── */
+:root {
+  /* medium glass — cards, panels */
+  --gm-bg:      rgba(242,238,230,0.38);
+  --gm-blur:    16px;
+  --gm-sat:     160%;
+  --gm-border:  rgba(255,255,255,0.58);
+  --gm-shadow:  0 4px 24px rgba(14,14,14,0.09),
+                inset 0 1px 0 rgba(255,255,255,0.68),
+                inset 0 -1px 0 rgba(14,14,14,0.04);
+  --gm-hover:   0 14px 44px rgba(14,14,14,0.13),
+                inset 0 1px 0 rgba(255,255,255,0.74),
+                inset 0 -1px 0 rgba(14,14,14,0.04);
+  /* light glass — tags, pills, secondary */
+  --gl-bg:      rgba(255,255,255,0.18);
+  --gl-border:  rgba(255,255,255,0.42);
+}
+[data-mode="dark"] {
+  --gm-bg:      rgba(18,18,28,0.52);
+  --gm-border:  rgba(255,255,255,0.1);
+  --gm-shadow:  0 4px 24px rgba(0,0,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.09),
+                inset 0 -1px 0 rgba(0,0,0,0.36);
+  --gm-hover:   0 14px 44px rgba(0,0,0,0.55),
+                inset 0 1px 0 rgba(255,255,255,0.12);
+  --gl-bg:      rgba(255,255,255,0.06);
+  --gl-border:  rgba(255,255,255,0.1);
+}
+
+/* ─── Ambient background layer ─────────────────────────────────── */
+.bg-ambi {
+  position: fixed; inset: 0;
+  z-index: 0; pointer-events: none; overflow: hidden;
+}
+.bg-ambi-blob {
+  position: absolute; border-radius: 50%;
+  filter: blur(100px); will-change: transform;
+}
+.bab-1 {
+  width: 680px; height: 680px; top: -8%; left: -6%;
+  background: radial-gradient(circle, rgba(80,79,237,0.22), transparent 68%);
+  animation: bd1 22s ease-in-out infinite alternate;
+}
+.bab-2 {
+  width: 560px; height: 560px; top: 36%; right: -7%;
+  background: radial-gradient(circle, rgba(122,91,216,0.18), transparent 68%);
+  animation: bd2 28s ease-in-out infinite alternate;
+}
+.bab-3 {
+  width: 500px; height: 500px; bottom: 14%; left: 16%;
+  background: radial-gradient(circle, rgba(224,168,46,0.15), transparent 68%);
+  animation: bd3 32s ease-in-out infinite alternate;
+}
+.bab-4 {
+  width: 380px; height: 380px; top: 56%; right: 20%;
+  background: radial-gradient(circle, rgba(14,138,90,0.13), transparent 68%);
+  animation: bd1 24s ease-in-out infinite alternate-reverse;
+}
+@keyframes bd1 {
+  from { transform: translate(0,0) scale(1); }
+  to   { transform: translate(55px,78px) scale(1.14); }
+}
+@keyframes bd2 {
+  from { transform: translate(0,0) scale(1); }
+  to   { transform: translate(-48px,62px) scale(1.1); }
+}
+@keyframes bd3 {
+  from { transform: translate(0,0) scale(1); }
+  to   { transform: translate(42px,-58px) scale(1.12); }
+}
+/* Stronger blobs in dark mode */
+[data-mode="dark"] .bab-1 { background: radial-gradient(circle, rgba(80,79,237,0.38), transparent 68%); }
+[data-mode="dark"] .bab-2 { background: radial-gradient(circle, rgba(122,91,216,0.3),  transparent 68%); }
+[data-mode="dark"] .bab-3 { background: radial-gradient(circle, rgba(224,168,46,0.22),  transparent 68%); }
+[data-mode="dark"] .bab-4 { background: radial-gradient(circle, rgba(14,138,90,0.2),    transparent 68%); }
+
+/* ─── Glass card — medium material ─────────────────────────────── */
+.gl-card {
+  position: relative;
+  background: var(--gm-bg);
+  backdrop-filter: blur(var(--gm-blur)) saturate(var(--gm-sat));
+  -webkit-backdrop-filter: blur(var(--gm-blur)) saturate(var(--gm-sat));
+  border: 1px solid var(--gm-border);
+  box-shadow: var(--gm-shadow);
+  border-radius: 20px;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.38s cubic-bezier(.2,.7,.2,1),
+              box-shadow 0.38s cubic-bezier(.2,.7,.2,1);
+}
+/* Pointer-reactive specular highlight */
+.gl-card::before {
+  content: '';
+  position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(
+    ellipse at var(--mx,50%) var(--my,-10%),
+    rgba(255,255,255,0.26) 0%, transparent 56%
+  );
+  pointer-events: none; z-index: 2;
+  opacity: 0; transition: opacity 0.44s ease;
+}
+/* Luminous top edge */
+.gl-card::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(
+    90deg, transparent 0%, var(--gm-border) 20%,
+    rgba(255,255,255,0.9) 50%,
+    var(--gm-border) 80%, transparent 100%
+  );
+  pointer-events: none; z-index: 3;
+}
+.gl-card:hover { transform: translateY(-5px) scale(1.008); box-shadow: var(--gm-hover); }
+.gl-card:hover::before { opacity: 1; }
+
+/* ─── Glass tag — light material ────────────────────────────────── */
+.gl-tag {
+  position: relative;
+  background: var(--gl-bg);
+  backdrop-filter: blur(8px) saturate(140%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  border: 1px solid var(--gl-border);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.44),
+              0 1px 6px rgba(14,14,14,0.06);
+  transition: background 0.22s, border-color 0.22s,
+              color 0.22s, transform 0.22s, box-shadow 0.22s;
+}
+.gl-tag:hover {
+  background: rgba(80,79,237,0.1);
+  border-color: rgba(80,79,237,0.36);
+  color: var(--accent) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(80,79,237,0.1),
+              inset 0 1px 0 rgba(255,255,255,0.5);
+}
+[data-mode="dark"] .gl-tag {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07),
+              0 1px 6px rgba(0,0,0,0.22);
+}
+
+/* ─── Nav scrolled glass enhancement ───────────────────────────── */
+.gl-nav {
+  position: relative;
+}
+.gl-nav::before {
+  content: '';
+  position: absolute; bottom: -1px; left: 6%; right: 6%; height: 1px;
+  background: linear-gradient(
+    90deg, transparent, rgba(255,255,255,0.6) 30%,
+    rgba(255,255,255,0.6) 70%, transparent
+  );
+  pointer-events: none;
+}
+[data-mode="dark"] .gl-nav::before {
+  background: linear-gradient(
+    90deg, transparent, rgba(255,255,255,0.12) 30%,
+    rgba(255,255,255,0.12) 70%, transparent
+  );
+}
+
+/* ─── Service accordion item — subtle glass on open ─────────────── */
+.svc-open {
+  background: var(--gm-bg);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border-radius: 12px;
+  margin: 0 -18px !important;
+  padding-left: 18px !important;
+  padding-right: 18px !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+}
+
+/* ─── Testimonial glass cell ────────────────────────────────────── */
+.gl-testi {
+  position: relative; overflow: hidden;
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  transition: background 0.3s;
+}
+.gl-testi::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(
+    ellipse at var(--mx,50%) var(--my,-10%),
+    rgba(255,255,255,0.2) 0%, transparent 60%
+  );
+  pointer-events: none; z-index: 1;
+  opacity: 0; transition: opacity 0.44s;
+}
+.gl-testi:hover::before { opacity: 1; }
+.gl-testi > * { position: relative; z-index: 2; }
+
+/* ─── Glass CTA button ──────────────────────────────────────────── */
+.gl-cta {
+  position: relative;
+  background: var(--gl-bg);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid var(--gl-border);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5),
+              0 4px 20px rgba(80,79,237,0.12);
+  transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+  overflow: hidden;
+}
+.gl-cta::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8) 40%, rgba(255,255,255,0.8) 60%, transparent);
+  pointer-events: none;
+}
+.gl-cta:hover {
+  transform: scale(1.04);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6),
+              0 8px 32px rgba(80,79,237,0.2);
+  background: rgba(80,79,237,0.1);
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .bg-ambi-blob { animation: none !important; }
+  .gl-card, .gl-tag, .gl-testi, .gl-cta {
+    transition: none !important;
+  }
+}
+
+/* ─── Backdrop-filter fallback ──────────────────────────────────── */
+@supports not (backdrop-filter: blur(1px)) {
+  .gl-card  { background: rgba(242,238,230,0.94); }
+  .gl-testi { background: rgba(242,238,230,0.94); }
+  .gl-tag   { background: rgba(242,238,230,0.8); }
+  [data-mode="dark"] .gl-card  { background: rgba(18,18,28,0.96); }
+  [data-mode="dark"] .gl-testi { background: rgba(18,18,28,0.96); }
+  [data-mode="dark"] .gl-tag   { background: rgba(18,18,28,0.85); }
 }
 
 /* ─── Responsive ──────────────────────────────────────────────── */
