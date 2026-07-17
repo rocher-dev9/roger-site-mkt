@@ -1,329 +1,238 @@
-/* ─── About page ──────────────────────────────────────────────── */
+<!DOCTYPE html>
+<html lang="es">
 
-/* Nav */
-.about-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  padding: 20px 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: color-mix(in srgb, var(--bg) 62%, transparent);
-  backdrop-filter: blur(24px) saturate(200%) brightness(1.04);
-  -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(1.04);
-  border-bottom: 1px solid rgba(255,255,255,0.55);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.55) inset, 0 4px 24px rgba(14,14,14,0.06);
-}
-.about-nav::before {
-  content: '';
-  position: absolute;
-  bottom: -1px; left: 6%; right: 6%; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6) 30%, rgba(255,255,255,0.6) 70%, transparent);
-  pointer-events: none;
-}
-[data-mode="dark"] .about-nav {
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.07) inset, 0 4px 24px rgba(0,0,0,0.3);
-}
-[data-mode="dark"] .about-nav::before {
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1) 30%, rgba(255,255,255,0.1) 70%, transparent);
-}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>about — Roger A. · Visual Designer & Marketing Assistant</title>
+  <meta name="description" content="Sobre Roger Avellana — Visual Designer & Marketing Assistant." />
+  <meta name="theme-color" content="#504FED" />
 
-.about-nav-brand {
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-}
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
 
-.about-nav-links {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  font-size: 14px;
-}
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="about.css" />
+</head>
 
-.about-nav-links a {
-  letter-spacing: -0.01em;
-  color: var(--text);
-  opacity: 0.6;
-  transition: opacity 0.2s;
-}
+<body data-mode="light">
 
-.about-nav-links a:hover,
-.about-nav-links a.active {
-  opacity: 1;
-}
+  <!-- Ambient background blobs -->
+  <div class="bg-ambi" aria-hidden="true">
+    <div class="bg-ambi-blob bab-1"></div>
+    <div class="bg-ambi-blob bab-2"></div>
+    <div class="bg-ambi-blob bab-3"></div>
+    <div class="bg-ambi-blob bab-4"></div>
+  </div>
 
-.about-nav-cta {
-  background: var(--text);
-  color: var(--bg) !important;
-  opacity: 1 !important;
-  padding: 10px 18px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  transition: transform 0.2s !important;
-}
+  <!-- NAV -->
+  <nav class="about-nav">
+    <a href="index.html" class="about-nav-brand">
+      <span>Roger</span><span class="slash">/</span><span>Marketing</span>
+    </a>
+    <div class="about-nav-links">
+      <a href="index.html#services">/<span>experience</span></a>
+      <a href="index.html#work">/<span>work</span></a>
+      <a href="about.html" class="active">/<span>about</span></a>
+      <a href="mailto:roger.ar123@gmail.com" class="about-nav-cta">let's connect →</a>
+    </div>
+    <button class="about-nav-burger" onclick="toggleMenu()" aria-label="menu">menu</button>
+  </nav>
 
-.about-nav-cta:hover {
-  transform: scale(1.04);
-}
+  <!-- MOBILE MENU -->
+  <div class="about-mobile-menu" id="mobileMenu">
+    <a href="index.html#services" onclick="toggleMenu()">/experience</a>
+    <a href="index.html#work" onclick="toggleMenu()">/work</a>
+    <a href="about.html" onclick="toggleMenu()">/about</a>
+    <a href="mailto:roger.ar123@gmail.com" class="about-mobile-cta">let's connect →</a>
+  </div>
 
-.about-nav-burger {
-  display: none;
-  background: none;
-  border: 1px solid var(--line);
-  padding: 8px 14px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-family: inherit;
-  color: var(--text);
-  cursor: pointer;
-}
+  <!-- ABOUT LAYOUT -->
+  <main class="about-layout">
 
-/* Mobile menu */
-.about-mobile-menu {
-  display: none;
-  position: fixed;
-  top: 68px; left: 0; right: 0; bottom: 0;
-  background: var(--bg);
-  z-index: 99;
-  flex-direction: column;
-  padding: 40px 24px;
-  gap: 24px;
-  border-top: 1px solid var(--line);
-}
+    <!-- Columna izquierda -->
+    <div class="about-col-left">
+      <h1 class="about-greeting">
+        Hola, soy <em>Roger.</em>
+      </h1>
+      <p class="about-bio">
+        Roger Avellana. Diseñador visual y digital con más de ocho años de experiencia en proyectos de identidad de
+        marca, UI/UX y comunicación digital. Actualmente ampliando el perfil hacia el marketing digital y la estrategia
+        de comunicación, con especial interés en la intersección entre diseño de sistemas y herramientas de IA aplicadas
+        al proceso creativo.
+      </p>
+      <p class="about-contact">
+        Escríbeme a
+        <a href="mailto:roger.ar123@gmail.com">send an email</a>
+        o en
+        <a href="https://www.linkedin.com/in/roger-avellana/" target="_blank" rel="noopener">LinkedIn</a>.
+      </p>
 
-.about-mobile-menu.open { display: flex; }
+      <!-- Experience -->
+      <div class="about-block">
+        <p class="about-section-label">Experience</p>
+        <div class="about-exp-row">
+          <span><strong>Intera</strong> <span class="muted">/ Diseño Visual &amp; Estrategia Digital</span></span>
+          <span class="mono">2023–2026</span>
+        </div>
+        <div class="about-exp-row">
+          <span><strong>nVision Systems</strong> <span class="muted">/ Ferias Internacionales</span></span>
+          <span class="mono">2021–2023</span>
+        </div>
+        <div class="about-exp-row">
+          <span><strong>Sensing &amp; Control</strong> <span class="muted">/ UI/UX · Dashboard IoT</span></span>
+          <span class="mono">2019–2021</span>
+        </div>
+        <div class="about-exp-row">
+          <span><strong>Ayuntamiento de Igualada</strong> <span class="muted">/ Campañas Municipales</span></span>
+          <span class="mono">2018–2019</span>
+        </div>
+      </div>
 
-.about-mobile-menu a {
-  font-size: 32px;
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  color: var(--text);
-}
+      <!-- Education -->
+      <div class="about-block">
+        <p class="about-section-label">Education</p>
+        <div class="about-exp-row">
+          <span><strong>Escola Superior de Disseny</strong> <span class="muted">/ Diseño Gráfico</span></span>
+          <span class="mono">2016</span>
+        </div>
+        <div class="about-exp-row">
+          <span><strong>Universitat Oberta de Catalunya</strong> <span class="muted">/ Interacción Digital y
+              Multimedia</span></span>
+          <span class="mono">2020</span>
+        </div>
+        <div class="about-exp-row">
+          <span><strong>Universitat de Barcelona</strong> <span class="muted">/ Posgrado Marketing Digital, E-Commerce
+              &amp; Social Media</span></span>
+          <span class="mono">2026</span>
+        </div>
+      </div>
+    </div>
 
-.about-mobile-cta {
-  margin-top: 12px;
-  font-size: 18px !important;
-  color: var(--accent) !important;
-  font-style: italic;
-  font-family: var(--serif);
-}
+    <!-- Columna central: foto portrait -->
+    <div class="about-col-center" id="col-portrait">
+      <canvas id="canvas-portrait"></canvas>
+      <span class="photo-label">portrait</span>
+    </div>
 
-/* Layout grid */
-.about-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  min-height: calc(100vh - 68px);
-  margin-top: 68px;
-  border-bottom: 1px solid var(--line);
-}
+    <!-- Columna derecha: dos fotos -->
+    <div class="about-col-right">
+      <div class="about-photo-top" id="col-photo1">
+        <canvas id="canvas-photo1"></canvas>
+        <span class="photo-label">photo 01</span>
+      </div>
+      <div class="about-photo-bottom" id="col-photo2">
+        <canvas id="canvas-photo2"></canvas>
+        <span class="photo-label">photo 02</span>
+      </div>
+    </div>
 
-/* Left column */
-.about-col-left {
-  padding: 64px 40px;
-  border-right: 1px solid var(--line);
-  overflow-y: auto;
-}
+  </main>
 
-.about-greeting {
-  font-size: clamp(1.8rem, 2.8vw, 2.8rem);
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-}
+  <!-- FOOTER -->
+  <footer class="about-footer">
+    <span class="mono">© 2026 Roger Avellana · Barcelona · Catalunya · all rights reserved.</span>
+    <span class="mono"><span class="slash">/</span>vibe-coded with care.</span>
+  </footer>
 
-.about-greeting em {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-}
+  <script>
+    function toggleMenu() {
+      const m = document.getElementById('mobileMenu');
+      m.classList.toggle('open');
+    }
+  </script>
 
-.about-bio {
-  margin-top: 20px;
-  font-size: 14px;
-  line-height: 1.7;
-  color: var(--text-soft);
-  max-width: 360px;
-}
+  <script>
+    (function () {
+      const panels = [
+        {
+          canvasId: 'canvas-portrait',
+          colId: 'col-portrait',
+          blobs: [
+            { ox: 0.35, oy: 0.30, color: [80, 79, 237],   phase: 0 },
+            { ox: 0.65, oy: 0.65, color: [122, 91, 216],  phase: 2.09 },
+            { ox: 0.50, oy: 0.88, color: [45, 43, 186],   phase: 4.19 },
+          ],
+          bg: '#07071a',
+          radius: 0.65,
+        },
+        {
+          canvasId: 'canvas-photo1',
+          colId: 'col-photo1',
+          blobs: [
+            { ox: 0.25, oy: 0.40, color: [100, 60, 220],  phase: 1.0 },
+            { ox: 0.75, oy: 0.55, color: [60,  80, 200],  phase: 3.1 },
+          ],
+          bg: '#080814',
+          radius: 0.7,
+        },
+        {
+          canvasId: 'canvas-photo2',
+          colId: 'col-photo2',
+          blobs: [
+            { ox: 0.60, oy: 0.35, color: [130, 70, 230],  phase: 0.5 },
+            { ox: 0.30, oy: 0.70, color: [70,  60, 210],  phase: 2.6 },
+          ],
+          bg: '#090710',
+          radius: 0.7,
+        },
+      ];
 
-.about-contact {
-  margin-top: 16px;
-  font-size: 13px;
-  color: var(--text-soft);
-}
+      const instances = panels.map(({ canvasId, colId, blobs, bg, radius }) => {
+        const canvas = document.getElementById(canvasId);
+        const col    = document.getElementById(colId);
+        const ctx    = canvas.getContext('2d');
 
-.about-contact a {
-  color: var(--accent);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
+        function resize() {
+          canvas.width  = col.offsetWidth;
+          canvas.height = col.offsetHeight;
+        }
+        resize();
+        new ResizeObserver(resize).observe(col);
 
-.about-block {
-  margin-top: 48px;
-}
+        return { canvas, ctx, blobs, bg, radius };
+      });
 
-.about-section-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 8px;
-}
+      function draw(ts) {
+        const t = ts * 0.00042;
 
-.about-exp-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 16px;
-  padding: 12px 10px;
-  border-bottom: 1px solid var(--line);
-  border-radius: 8px;
-  font-size: 13px;
-  letter-spacing: -0.01em;
-  transition: background 0.25s, backdrop-filter 0.25s, box-shadow 0.25s;
-  cursor: default;
-}
-.about-exp-row:hover {
-  background: rgba(242,238,230,0.38);
-  backdrop-filter: blur(12px) saturate(150%);
-  -webkit-backdrop-filter: blur(12px) saturate(150%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 2px 12px rgba(14,14,14,0.06);
-  border-bottom-color: transparent;
-}
-[data-mode="dark"] .about-exp-row:hover {
-  background: rgba(18,18,28,0.45);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 2px 12px rgba(0,0,0,0.3);
-}
+        instances.forEach(({ canvas, ctx, blobs, bg, radius }) => {
+          const w = canvas.width, h = canvas.height;
+          const maxR = Math.max(w, h) * radius;
 
-.about-exp-row strong { font-weight: 500; }
+          ctx.fillStyle = bg;
+          ctx.fillRect(0, 0, w, h);
+          ctx.globalCompositeOperation = 'screen';
 
-.muted { color: var(--muted); }
-.mono { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: var(--muted); flex-shrink: 0; }
+          blobs.forEach(b => {
+            const x = (b.ox + Math.sin(t       + b.phase) * 0.18) * w;
+            const y = (b.oy + Math.cos(t * 0.8 + b.phase) * 0.18) * h;
+            const [r, g, bc] = b.color;
 
-/* Canvas gradient animation */
-#canvas-portrait,
-#canvas-photo1,
-#canvas-photo2 {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-}
+            const grad = ctx.createRadialGradient(x, y, 0, x, y, maxR);
+            grad.addColorStop(0,   `rgba(${r},${g},${bc},0.95)`);
+            grad.addColorStop(0.4, `rgba(${r},${g},${bc},0.4)`);
+            grad.addColorStop(1,   `rgba(${r},${g},${bc},0)`);
 
-/* Center column: portrait */
-.about-col-center {
-  position: relative;
-  background: #07071a;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  padding: 12px;
-  min-height: 400px;
-}
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+          });
 
-.about-col-center img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+          ctx.globalCompositeOperation = 'source-over';
+        });
 
-/* Right column: two photos */
-.about-col-right {
-  display: flex;
-  flex-direction: column;
-  border-left: 1px solid var(--line);
-}
+        requestAnimationFrame(draw);
+      }
 
-.about-photo-top {
-  flex: 1;
-  border-bottom: 1px solid var(--line);
-  background: #080814;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  padding: 12px;
-  position: relative;
-  overflow: hidden;
-}
+      requestAnimationFrame(draw);
+    })();
+  </script>
 
-.about-photo-bottom {
-  flex: 1;
-  background: #090710;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  padding: 12px;
-  position: relative;
-  overflow: hidden;
-}
+</body>
 
-.about-photo-top img,
-.about-photo-bottom img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.photo-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.04em;
-  color: rgba(255,255,255,0.35);
-  position: relative;
-  z-index: 1;
-}
-
-/* Footer */
-.about-footer {
-  border-top: 1px solid var(--line);
-  padding: 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .about-nav-links { display: none; }
-  .about-nav-burger { display: block; }
-
-  .about-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .about-col-left {
-    border-right: none;
-  }
-
-  .about-col-center {
-    min-height: 380px;
-  }
-
-  .about-col-right {
-    flex-direction: row;
-    min-height: 220px;
-    border-left: none;
-    border-top: 1px solid var(--line);
-  }
-
-  .about-photo-top {
-    border-bottom: none;
-    border-right: 1px solid var(--line);
-  }
-}
+</html>
